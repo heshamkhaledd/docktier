@@ -1,0 +1,18 @@
+dockertier/
+├── README.md
+├── Dockerfile             # Builds the Flask app image
+├── docker-compose.yml     # Orchestrates app and database
+├── .dockerignore          # Keeps Docker image clean
+└── src/
+    ├── app/
+    │   ├── __init__.py
+    │   ├── models.py
+    │   ├── auth.py
+    │   ├── routes.py
+    │   └── templates/
+    │       ├── login.html
+    │       ├── signup.html
+    │       ├── products.html
+    │       └── order.html
+    ├── requirements.txt
+    └── run.py

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <h2>Product Inventory</h2>
+
+    <ul>
+    {% for item in items %}
+        <li style="opacity: {{ '0.5' if item.available_quantity == 0 else '1' }}">
+            {{ item.product_name }} - ${{ item.unit_price }} ({{ item.available_quantity }} left)
+            {% if item.available_quantity > 0 %}
+                <a href="{{ url_for('main.order', item_id=item.id) }}">Order</a>
+            {% else %}
+                <span>Out of Stock</span>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</body>
+</html>

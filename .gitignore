@@ -1,0 +1,22 @@
+# Python cache and environment
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.egg-info/
+.Python
+.env
+venv/
+ENV/
+env/
+.idea/
+.vscode/
+.DS_Store
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+*.log
+postgres_data/

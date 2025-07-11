@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Order</title>
+</head>
+<body>
+    <h2>Order: {{ item.product_name }}</h2>
+    <p>Price: ${{ item.unit_price }}</p>
+    <p>Available: {{ item.available_quantity }}</p>
+
+    <form method="POST">
+        <input type="number" name="quantity" placeholder="Quantity" min="1" max="{{ item.available_quantity }}" required><br>
+        <button type="submit">Submit Order</button>
+    </form>
+
+    <p><a href="{{ url_for('main.products') }}">Back to Products</a></p>
+</body>
+</html>
