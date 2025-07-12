@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 import json
 import sys
+import os
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -23,7 +24,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'dev'
     db_info = read_db_info()
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{db_info['user']}:{db_info['password']}@{db_info['host']}:{db_info['port']}/{db_info['db_name']}"
+    if os.environ.get('DATABASE_URL') != None:
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    else:
+        app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{db_info['user']}:{db_info['password']}@{db_info['host']}:{db_info['port']}/{db_info['db_name']}"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

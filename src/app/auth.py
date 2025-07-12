@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 import bcrypt
 from .models import User
@@ -29,6 +29,13 @@ def login():
     return render_template('login.html')
 
 
+@auth_bp.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('auth.login'))
+
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -54,9 +61,7 @@ def signup():
             return redirect(url_for('auth.signup'))
 
         hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        new_id = (db.session.query(func.max(User.id)).scalar() or 0) + 1
         user = User(
-            id = new_id,
             first_name=first_name,
             last_name=last_name,
             email=email,

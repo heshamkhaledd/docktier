@@ -1,7 +1,7 @@
 {
     "db_name": "vaultgres",
-    "user": "admin",
-    "password": "admin",
-    "host": "localhost",
+    "user": "db_root",
+    "password": "db_root",
+    "host": "vaultgres_db",
     "port": 5432
 }

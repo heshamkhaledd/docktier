@@ -1,0 +1,19 @@
+services:
+  web-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dockertier
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://db_root:db_root@vaultgres_db:5432/vaultgres
+
+    # Join the same external network as vaultgres's db
+    networks:
+      - vaultgres_network
+
+# Reference the shared external Docker network
+networks:
+  vaultgres_network:
+    external: true
